@@ -81,10 +81,6 @@ var Game = ({
     },
     answerMove: function (tdElement) {
         var result;
-        var row = getTDRow(tdElement);
-        var col = getTDCol(tdElement);
-        var diag1 = getDiag1(tdElement);
-        var diag2 = getDiag2(tdElement);
         var allRoutes = Board.getAllRoutes();
         //Will the computer win within next move?
         allRoutes.forEach(function (route) {
@@ -101,28 +97,6 @@ var Game = ({
                 result = Game.fillNullSquare(hotSpace.rowId, hotSpace.colId);
         })   
 
-        //Loop through array container and inspect inner array for 2 values equal to "O" and fills in item with null value, add else if for "X".
-        //         function inspectRoute() {
-        //             var routes = getAllRoutes();
-        //             for (var i = 0; i < routes.length; i++) {
-        //                 var result = routes[i].filter(function (square) {
-        //                     return square.value == "X" || "O";
-        //                 })
-        //                 //first check if this instance of a route contains two "O", before checking if two "X". Then fill the null square accordingly.
-        //                 for (var j = 0; j < result.length; j++) {
-        // 
-        //                 }
-        //             }
-        //         }
-        //Will the computer lose within opponent's next move?
-        // if (isRouteType(row, "Threat")) {
-        //     result = Game.moveIfGood(row);
-        // } else if (isRouteType(col, "Threat")) {
-        //     result = Game.moveIfGood(col);
-        // } else if (isRouteType(diag1, "Threat")) {
-        //     result = Game.moveIfGood(diag1);
-        // } else if (isRouteType(diag2, "Threat")) {
-        //     result = Game.moveIfGood(diag2);
         // No immediate win or loss, first fill center if null, then make routes by filling corners first
         if (!result) {
             if (Board.board[1][1] == null) {
@@ -197,20 +171,6 @@ var boardCell = function (rowId, colId, value) {
     this.colId = colId;
     this.value = value;
     return this;
-}
-function isRouteType(route, type) {
-    if (type === "Threat") {
-        var search = human;
-    } else if (type === "Opportunity") {
-        var search = computer;
-    }
-    var itemCount = route.reduce(function (index, item) {
-        return index + (item.value === search);
-    }, 0);
-    var nullCount = route.reduce(function (index, item) {
-        return index + (item.value === null);
-    }, 0);
-    return itemCount === 2 && nullCount == 1;
 }
 
 //Accepts the tdElement that the human clicked on, and returns any winning routes that move is in.

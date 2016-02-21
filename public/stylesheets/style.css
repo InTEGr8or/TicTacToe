@@ -1,0 +1,19 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+    #ticTacToe td {
+      border: 2px solid black;
+      font-size: 54px;
+      width: 80px;
+      height: 80px;
+      text-align: center;
+    }
+    
+    .highlight {
+      background-color: #FCE4BD;
+    }
